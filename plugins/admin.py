@@ -7,6 +7,8 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 from config import *
 from database.database import db
 from datetime import datetime, timedelta
+import platform
+from pyrogram.errors import PeerIdInvalid
 
 @Client.on_message(filters.command("addchannel") & filters.private)
 async def add_channel(bot: Client, message: Message):
@@ -21,6 +23,8 @@ async def add_channel(bot: Client, message: Message):
         chat = await bot.get_chat(channel_id)
         await db.add_channel(channel_id, chat.title)
         await message.reply_text(f"{E_SUCCESS} **ᴀᴅᴅᴇᴅ {chat.title} ({channel_id})**")
+    except PeerIdInvalid:
+        await message.reply_text(f"{E_ERROR} **ᴇʀʀᴏʀ: ᴘᴇᴇʀ ɪᴅ ɪɴᴠᴀʟɪᴅ!**\n\n📌 **ᴛɪᴘ:** ᴍᴀᴋᴇ sᴜʀᴇ ᴛʜᴇ ʙᴏᴛ ɪs ᴀɴ ᴀᴅᴍɪɴ ɪɴ ᴛʜᴇ ᴄʜᴀɴɴᴇʟ ʙᴇғᴏʀᴇ ᴀᴅᴅɪɴɢ ɪᴛ.")
     except Exception as e:
         await message.reply_text(f"{E_ERROR} **ᴇʀʀᴏʀ:** {e}")
 
@@ -151,3 +155,28 @@ async def fsub_remove_cmd(bot: Client, message: Message):
     channel_id = int(message.command[1])
     await db.remove_fsub(channel_id)
     await message.reply_text(f"{E_SUCCESS} **ʀᴇᴍᴏᴠᴇᴅ {channel_id} ғʀᴏᴍ ғsᴜʙ!**")
+
+@Client.on_message(filters.command("status") & filters.private)
+async def status_cmd(bot: Client, message: Message):
+    if message.from_user.id != OWNER_ID and not await db.is_admin(message.from_user.id):
+        return
+
+    if hasattr(bot, "uptime"):
+        uptime_sec = (datetime.now() - bot.uptime).total_seconds()
+        uptime = str(timedelta(seconds=int(uptime_sec)))
+    else:
+        uptime = "Unknown"
+
+    py_ver = platform.python_version()
+    bot_ver = "1.0.0"
+
+    text = (
+        f"🚀 **𝗕𝗼𝘁 𝗦𝘆𝘀𝘁𝗲𝗺 𝗦𝘁𝗮𝘁𝘂𝘀**\n"
+        f"{T_DIVIDER}\n"
+        f"⏱️ **ᴜᴘᴛɪᴍᴇ:** `{uptime}`\n"
+        f"🐍 **ᴘʏᴛʜᴏɴ:** `{py_ver}`\n"
+        f"🤖 **ʙᴏᴛ ᴠᴇʀsɪᴏɴ:** `{bot_ver}`\n"
+        f"💻 **ᴘʟᴀᴛғᴏʀᴍ:** `{platform.system()}`\n"
+        f"{T_DIVIDER}"
+    )
+    await message.reply_text(text)

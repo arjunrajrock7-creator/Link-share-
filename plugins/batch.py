@@ -17,6 +17,8 @@ async def bulk_gen_cmd(bot: Client, message: Message):
 
 @Client.on_callback_query(filters.regex(r"^bulk_page_(\d+)$"))
 async def bulk_page_callback(bot: Client, query: CallbackQuery):
+    if query.from_user.id != OWNER_ID and not await db.is_admin(query.from_user.id):
+        return await query.answer("ᴀᴄᴄᴇss ᴅᴇɴɪᴇᴅ!", show_alert=True)
     page = int(query.data.split("_")[2])
     await show_bulk_selection(bot, query, page=page)
 
@@ -57,6 +59,8 @@ async def show_bulk_selection(bot, message_or_query, page):
 
 @Client.on_callback_query(filters.regex("^bulk_select_"))
 async def bulk_select_callback(bot: Client, query: CallbackQuery):
+    if query.from_user.id != OWNER_ID and not await db.is_admin(query.from_user.id):
+        return await query.answer("ᴀᴄᴄᴇss ᴅᴇɴɪᴇᴅ!", show_alert=True)
     user_id = query.from_user.id
     parts = query.data.split("_")
     channel_id = int(parts[2])
@@ -74,6 +78,8 @@ async def bulk_select_callback(bot: Client, query: CallbackQuery):
 
 @Client.on_callback_query(filters.regex("^bulk_gen_run$"))
 async def bulk_gen_run(bot: Client, query: CallbackQuery):
+    if query.from_user.id != OWNER_ID and not await db.is_admin(query.from_user.id):
+        return await query.answer("ᴀᴄᴄᴇss ᴅᴇɴɪᴇᴅ!", show_alert=True)
     user_id = query.from_user.id
     if user_id not in selected_channels or not selected_channels[user_id]:
         return await query.answer("sᴇʟᴇᴄᴛ ᴀᴛʟᴇᴀsᴛ ᴏɴᴇ!", show_alert=True)

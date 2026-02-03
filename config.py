@@ -70,9 +70,7 @@ START_MSG = """
 
 🎋 **Hᴇʟʟᴏ {mention}**
 
-📌 **Sᴇɴᴅ ᴍᴇ ᴀɴ Aɴɪᴍᴇ/Mᴏᴠɪᴇ/Sᴇʀɪᴇs ɴᴀᴍᴇ**
-🔍 **I ᴡɪʟʟ sᴇᴀʀᴄʜ ғʀᴏᴍ ᴍʏ DB Cʜᴀɴɴᴇʟs**
-🔗 **I ᴡɪʟʟ sᴇɴᴅ ᴊᴏɪɴ ʟɪɴᴋs / ᴘᴏsᴛ ʟɪɴᴋs ɪɴsᴛᴀɴᴛʟʏ**
+**CHECK MY FEATURES IN BELOW TO USE FIX ERRORS**
 
 ⚡ **Fᴀsᴛ • Cʟᴇᴀɴ • Pʀᴇᴍɪᴜᴍ UI**
 {divider}
