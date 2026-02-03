@@ -133,4 +133,4 @@ async def gen_link_callback(bot: Client, query: CallbackQuery):
         await query.message.edit_text(text)
         await db.save_generated_link(channel_id, link_obj.invite_link, query.message.id, query.from_user.id, expiry)
     except Exception as e:
-        await query.message.edit_text(f"❌ **ᴇʀʀᴏʀ:** {e}")
+        await query.message.edit_text(f"{E_ERROR} **ᴇʀʀᴏʀ:** {e}")
