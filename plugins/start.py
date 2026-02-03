@@ -41,7 +41,8 @@ async def start_handler(bot: Client, message: Message):
         link=E_LINK,
         revoke=E_REVOKE,
         bulk=E_BULK,
-        support=SUPPORT_LINE
+        support=SUPPORT_LINE,
+        owner=OWNER_NAME
     )
 
     buttons = [
@@ -50,7 +51,8 @@ async def start_handler(bot: Client, message: Message):
             InlineKeyboardButton(f"{E_CHANNELS} ᴄʜᴀɴɴᴇʟs", callback_data="channels_list")
         ],
         [
-            InlineKeyboardButton(f"{E_STATS} sᴛᴀᴛs", callback_data="stats")
+            InlineKeyboardButton(f"{E_STATS} sᴛᴀᴛs", callback_data="stats"),
+            InlineKeyboardButton(f"👤 ᴏᴡɴᴇʀ", url=SUPPORT_LINK)
         ]
     ]
 
@@ -94,7 +96,8 @@ async def start_back(bot: Client, query):
         link=E_LINK,
         revoke=E_REVOKE,
         bulk=E_BULK,
-        support=SUPPORT_LINE
+        support=SUPPORT_LINE,
+        owner=OWNER_NAME
     )
 
     buttons = [
@@ -103,7 +106,8 @@ async def start_back(bot: Client, query):
             InlineKeyboardButton(f"{E_CHANNELS} ᴄʜᴀɴɴᴇʟs", callback_data="channels_list")
         ],
         [
-            InlineKeyboardButton(f"{E_STATS} sᴛᴀᴛs", callback_data="stats")
+            InlineKeyboardButton(f"{E_STATS} sᴛᴀᴛs", callback_data="stats"),
+            InlineKeyboardButton(f"👤 ᴏᴡɴᴇʀ", url=SUPPORT_LINK)
         ]
     ]
 

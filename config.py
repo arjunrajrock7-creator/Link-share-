@@ -18,37 +18,39 @@ def get_env(name: str, default: str = None, is_int: bool = False):
     return value
 
 # Telegram API credentials
-API_ID = get_env("API_ID", is_int=True)
-API_HASH = get_env("API_HASH", "")
-BOT_TOKEN = get_env("BOT_TOKEN", "")
+API_ID = get_env("API_ID", "31355944", is_int=True)
+API_HASH = get_env("API_HASH", "167e960d46363e3098f9c1fc78496adb")
+BOT_TOKEN = get_env("BOT_TOKEN", "8592003417:AAGonw5Y61jFHS5bq0eWMuqDL7hY84jZ3uI")
 
 # MongoDB credentials
-MONGO_DB_URI = get_env("MONGO_DB_URI", "")
-DB_NAME = get_env("DB_NAME", "SuperLinkShareBot")
+MONGO_DB_URI = get_env("MONGO_DB_URI", "mongodb+srv://botskingdom2:t7ognZuINrNfH3tj@cluster0.ystdy4m.mongodb.net/?retryWrites=true&w=majority")
+DB_NAME = get_env("DB_NAME", "Cluster0")
 
 # Owner and Admins
-OWNER_ID = get_env("OWNER_ID", is_int=True)
+OWNER_ID = get_env("OWNER_ID", "8557029592", is_int=True)
 # ADMINS can be a space-separated list of user IDs
 ADMINS_STR = get_env("ADMINS", "")
 ADMINS = [int(x) for x in ADMINS_STR.split()] if ADMINS_STR else []
 
 # Optional Configurations
 FSUB_ENABLED = get_env("FSUB_ENABLED", "True").lower() == "true"
-LOG_CHANNEL = get_env("LOG_CHANNEL", "0", is_int=True)
+LOG_CHANNEL = get_env("LOG_CHANNEL", "-1003840288506", is_int=True)
 PORT = get_env("PORT", "8080", is_int=True)
 TG_BOT_WORKERS = get_env("TG_BOT_WORKERS", "40", is_int=True)
 
 # Bot info
-BOT_USERNAME = get_env("BOT_USERNAME", "") # Will be auto-fetched if not set
+BOT_USERNAME = get_env("BOT_USERNAME", "HT_LINKFORWARD_BOT")
 
-# Support Admin
+# Owner / Channel Info
+OWNER_NAME = "⚡𝗛𝗘𝗠𝗔𝗡𝗧⚡"
 SUPPORT_ADMIN = "@ALONEKINGSTAR77"
+SUPPORT_LINK = "https://t.me/ALONEKINGSTAR77"
 SUPPORT_LINE = f"<blockquote><b>ᴀɴʏ ɪssᴜᴇ ᴘʟᴇᴀsᴇ ᴄᴏɴᴛᴀᴄᴛ ᴀᴅᴍɪɴ: {SUPPORT_ADMIN}</b></blockquote>"
 
 # --- ANIME THEME UI ---
 
 # Unicode premium styles & emojis
-T_BANNER = "✨ 𝗔𝗻𝗶𝗺𝗲 𝗟𝗶𝗻𝗸 𝗦𝗵𝗮𝗿𝗲𝗿 ✨"
+T_BANNER = f"✨ 𝗦𝗨𝗣𝗘𝗥 𝗟𝗜𝗡𝗞 𝗦𝗛𝗔𝗥𝗘 𝗕𝗬 {OWNER_NAME} ✨"
 T_DIVIDER = "━━━━━━━━━━━━━━━"
 E_START = "🎋"
 E_HELP = "📜"
@@ -71,7 +73,7 @@ START_MSG = """
 ʜᴇʟʟᴏ {mention} {pray}
 
 ɪ ᴀᴍ ᴀ **sᴜᴘᴇʀ ʟɪɴᴋ sʜᴀʀᴇ ʙᴏᴛ**
-ᴡɪᴛʜ ᴀɴɪᴍᴇ ᴛʜᴇᴍᴇᴅ ᴜɪ!
+ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ **{owner}**!
 
 {link} **ɢᴇɴᴇʀᴀᴛᴇ sᴇᴄᴜʀᴇ ʟɪɴᴋs**
 {revoke} **ᴀᴜᴛᴏ ʀᴇᴠᴏᴋᴇ ɪɴ 5 ᴍɪɴ**
