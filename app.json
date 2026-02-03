@@ -1,0 +1,59 @@
+{
+  "name": "Super Link Share Bot",
+  "description": "Super Link Share Bot with Anime Theme, Auto Revoke, and Bulk Generation.",
+  "repository": "https://github.com/abhinai2244/LINK-SHAREBOT",
+  "keywords": [
+    "telegram",
+    "bot",
+    "pyrogram",
+    "linkshare",
+    "anime"
+  ],
+  "env": {
+    "API_ID": {
+      "description": "Your Telegram API ID",
+      "required": true
+    },
+    "API_HASH": {
+      "description": "Your Telegram API Hash",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "Your Telegram Bot Token",
+      "required": true
+    },
+    "MONGO_DB_URI": {
+      "description": "Your MongoDB Connection URI",
+      "required": true
+    },
+    "DB_NAME": {
+      "description": "Your MongoDB Database Name",
+      "value": "SuperLinkShareBot",
+      "required": false
+    },
+    "OWNER_ID": {
+      "description": "Your Telegram User ID",
+      "required": true
+    },
+    "ADMINS": {
+      "description": "Space-separated Admin IDs",
+      "required": false
+    },
+    "FSUB_ENABLED": {
+      "description": "Force Subscription (True/False)",
+      "value": "True",
+      "required": false
+    },
+    "LOG_CHANNEL": {
+      "description": "Channel ID for logs",
+      "required": false
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "stack": "container"
+}
