@@ -41,10 +41,12 @@ TG_BOT_WORKERS = get_env("TG_BOT_WORKERS", "40", is_int=True)
 # Bot info
 BOT_USERNAME = get_env("BOT_USERNAME", "HT_LINKFORWARD_BOT")
 
-# Owner / Channel Info
-OWNER_NAME = "⚡𝗛𝗘𝗠𝗔𝗡𝗧⚡"
+# Branding & Support
+OWNER_NAME = "⚡𝗛𝗘𝗠𝗔𝗡𝗧𝗛⚡"
 SUPPORT_ADMIN = "@ALONEKINGSTAR77"
 SUPPORT_LINK = "https://t.me/ALONEKINGSTAR77"
+START_IMG = "https://freeimage.host/i/fZZKTOl"
+
 SUPPORT_LINE = f"<blockquote><b>ᴀɴʏ ɪssᴜᴇ ᴘʟᴇᴀsᴇ ᴄᴏɴᴛᴀᴄᴛ ᴀᴅᴍɪɴ: {SUPPORT_ADMIN}</b></blockquote>"
 
 # --- ANIME THEME UI ---
@@ -68,16 +70,13 @@ E_FSUB = "🔐"
 
 # Anime themed messages
 START_MSG = """
-{banner}
-{divider}
-ʜᴇʟʟᴏ {mention} {pray}
+✨ **𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 𝗟𝗶𝗻𝗸 𝗦𝗵𝗮𝗿𝗲 𝗕𝗼𝘁** ✨
 
-ɪ ᴀᴍ ᴀ **sᴜᴘᴇʀ ʟɪɴᴋ sʜᴀʀᴇ ʙᴏᴛ**
-ᴍᴀɪɴᴛᴀɪɴᴇᴅ ʙʏ **{owner}**!
+📌 **Sᴇɴᴅ ᴍᴇ ᴀɴ Aɴɪᴍᴇ/Mᴏᴠɪᴇ/Sᴇʀɪᴇs ɴᴀᴍᴇ**
+🔍 **I ᴡɪʟʟ sᴇᴀʀᴄʜ ғʀᴏᴍ ᴍʏ DB Cʜᴀɴɴᴇʟs**
+🔗 **I ᴡɪʟʟ sᴇɴᴅ ᴊᴏɪɴ ʟɪɴᴋs / ᴘᴏsᴛ ʟɪɴᴋs ɪɴsᴛᴀɴᴛʟʏ**
 
-{link} **ɢᴇɴᴇʀᴀᴛᴇ sᴇᴄᴜʀᴇ ʟɪɴᴋs**
-{revoke} **ᴀᴜᴛᴏ ʀᴇᴠᴏᴋᴇ ɪɴ 5 ᴍɪɴ**
-{bulk} **ʙᴜʟᴋ sᴜᴘᴘᴏʀᴛᴇᴅ**
+⚡ **Fᴀsᴛ • Cʟᴇᴀɴ • Pʀᴇᴍɪᴜᴍ UI**
 {divider}
 {support}
 """

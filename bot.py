@@ -43,6 +43,7 @@ class Bot(Client):
                 BotCommand("help", "Sʜᴏᴡ ʜᴇʟᴘ ᴍᴇɴᴜ"),
                 BotCommand("channels", "Sʜᴏᴡ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟs"),
                 BotCommand("genlink", "Eɴᴄᴏᴅᴇ ᴇxᴛᴇʀɴᴀʟ ʟɪɴᴋ"),
+                BotCommand("batch", "Bᴀᴛᴄʜ ʟɪɴᴋ ɢᴇɴ"),
                 BotCommand("status", "Bᴏᴛ sʏsᴛᴇᴍ sᴛᴀᴛᴜs"),
                 BotCommand("ping", "Bᴏᴛ ʟᴀᴛᴇɴᴄʏ")
             ])

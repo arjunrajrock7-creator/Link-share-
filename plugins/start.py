@@ -1,6 +1,6 @@
 import asyncio
 from pyrogram import Client, filters
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, InputMediaPhoto
 from config import *
 from database.database import db
 from plugins.fsub import force_sub
@@ -29,7 +29,10 @@ async def start_handler(bot: Client, message: Message):
                 f"{SUPPORT_LINE}"
             )
             buttons = [[InlineKeyboardButton("🔗 ᴏᴘᴇɴ ʟɪɴᴋ", url=link_data['url'])]]
-            return await message.reply_text(caption, reply_markup=InlineKeyboardMarkup(buttons))
+            try:
+                return await message.reply_photo(photo=START_IMG, caption=caption, reply_markup=InlineKeyboardMarkup(buttons))
+            except:
+                return await message.reply_text(caption, reply_markup=InlineKeyboardMarkup(buttons))
 
     # Regular Start
     mention = message.from_user.mention
@@ -60,7 +63,10 @@ async def start_handler(bot: Client, message: Message):
     if user_id == OWNER_ID or await db.is_admin(user_id):
         buttons.append([InlineKeyboardButton(f"{E_ADMIN} ᴀᴅᴍɪɴ ᴘᴀɴᴇʟ", callback_data="admin_panel")])
 
-    await message.reply_text(caption, reply_markup=InlineKeyboardMarkup(buttons))
+    try:
+        await message.reply_photo(photo=START_IMG, caption=caption, reply_markup=InlineKeyboardMarkup(buttons))
+    except Exception as e:
+        await message.reply_text(caption, reply_markup=InlineKeyboardMarkup(buttons))
 
 @Client.on_message(filters.command("help") & filters.private)
 @debounce(1.5)
@@ -71,7 +77,30 @@ async def help_handler(bot: Client, message: Message):
         divider=T_DIVIDER,
         support=SUPPORT_LINE
     )
-    await message.reply_text(caption)
+    try:
+        await message.reply_photo(photo=START_IMG, caption=caption)
+    except:
+        await message.reply_text(caption)
+
+@Client.on_message(filters.private & ~filters.command(["start", "help", "channels", "genlink", "bulkgen", "requeston", "requestoff", "addadmin", "rmadmin", "admins", "broadcast", "stats", "status", "ping", "fsub_add", "fsub_remove"]))
+@force_sub
+async def search_handler(bot: Client, message: Message):
+    query = message.text
+    if not query:
+        return
+
+    channels = await db.get_all_channels()
+    results = [ch for ch in channels if query.lower() in ch['title'].lower()]
+
+    if not results:
+        return await message.reply_text(f"{E_ERROR} **ɴᴏ ᴄʜᴀɴɴᴇʟs ғᴏᴜɴᴅ ғᴏʀ '{query}'**\n\n{SUPPORT_LINE}")
+
+    text = f"{T_BANNER}\n{T_DIVIDER}\n**sᴇᴀʀᴄʜ ʀᴇsᴜʟᴛs ғᴏʀ '{query}':**\n\n"
+    buttons = []
+    for ch in results[:10]: # Limit to 10 results
+        buttons.append([InlineKeyboardButton(f"📡 {ch['title']}", callback_data=f"gen_choice_{ch['_id']}")])
+
+    await message.reply_text(text, reply_markup=InlineKeyboardMarkup(buttons))
 
 @Client.on_callback_query(filters.regex("^help$"))
 async def help_callback(bot: Client, query):
@@ -81,7 +110,13 @@ async def help_callback(bot: Client, query):
         divider=T_DIVIDER,
         support=SUPPORT_LINE
     )
-    await query.message.edit_text(caption, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙 ʙᴀᴄᴋ", callback_data="start_back")]]))
+    try:
+        await query.message.edit_message_media(
+            media=InputMediaPhoto(media=START_IMG, caption=caption),
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙 ʙᴀᴄᴋ", callback_data="start_back")]])
+        )
+    except:
+        await query.message.edit_text(caption, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔙 ʙᴀᴄᴋ", callback_data="start_back")]]))
 
 @Client.on_callback_query(filters.regex("^start_back$"))
 @force_sub
@@ -114,4 +149,10 @@ async def start_back(bot: Client, query):
     if query.from_user.id == OWNER_ID or await db.is_admin(query.from_user.id):
         buttons.append([InlineKeyboardButton(f"{E_ADMIN} ᴀᴅᴍɪɴ ᴘᴀɴᴇʟ", callback_data="admin_panel")])
 
-    await query.message.edit_text(caption, reply_markup=InlineKeyboardMarkup(buttons))
+    try:
+        await query.message.edit_message_media(
+            media=InputMediaPhoto(media=START_IMG, caption=caption),
+            reply_markup=InlineKeyboardMarkup(buttons)
+        )
+    except:
+        await query.message.edit_text(caption, reply_markup=InlineKeyboardMarkup(buttons))
