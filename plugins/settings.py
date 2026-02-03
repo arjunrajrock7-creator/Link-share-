@@ -39,11 +39,13 @@ async def channels_cmd(bot: Client, message: Message):
 
 @Client.on_callback_query(filters.regex(r"^channels_list_(\d+)$"))
 async def channels_list_callback(bot: Client, query: CallbackQuery):
+    await query.answer()
     page = int(query.data.split("_")[2])
     await show_channels(bot, query, page=page)
 
 @Client.on_callback_query(filters.regex("^channels_list$"))
 async def channels_list_base_callback(bot: Client, query: CallbackQuery):
+    await query.answer()
     await show_channels(bot, query, page=1)
 
 async def show_channels(bot, message_or_query, page):

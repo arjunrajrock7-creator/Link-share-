@@ -23,10 +23,17 @@ async def add_channel(bot: Client, message: Message):
         chat = await bot.get_chat(channel_id)
         await db.add_channel(channel_id, chat.title)
         await message.reply_text(f"{E_SUCCESS} **ᴀᴅᴅᴇᴅ {chat.title} ({channel_id})**")
-    except PeerIdInvalid:
-        await message.reply_text(f"{E_ERROR} **ᴇʀʀᴏʀ: ᴘᴇᴇʀ ɪᴅ ɪɴᴠᴀʟɪᴅ!**\n\n📌 **ᴛɪᴘ:** ᴍᴀᴋᴇ sᴜʀᴇ ᴛʜᴇ ʙᴏᴛ ɪs ᴀɴ ᴀᴅᴍɪɴ ɪɴ ᴛʜᴇ ᴄʜᴀɴɴᴇʟ ʙᴇғᴏʀᴇ ᴀᴅᴅɪɴɢ ɪᴛ.")
-    except Exception as e:
-        await message.reply_text(f"{E_ERROR} **ᴇʀʀᴏʀ:** {e}")
+    except (PeerIdInvalid, Exception) as e:
+        if isinstance(e, PeerIdInvalid) or "Peer id invalid" in str(e):
+             await message.reply_text(
+                f"{E_ERROR} **ᴇʀʀᴏʀ: ᴘᴇᴇʀ ɪᴅ ɪɴᴠᴀʟɪᴅ!**\n\n"
+                f"📌 **ᴛɪᴘs ᴛᴏ ғɪx:**\n"
+                f"1️⃣ ᴍᴀᴋᴇ sᴜʀᴇ ᴛʜᴇ ʙᴏᴛ ɪs **ᴀᴅᴍɪɴ** ɪɴ ᴛʜᴇ ᴄʜᴀɴɴᴇʟ.\n"
+                f"2️⃣ sᴇɴᴅ ᴀ ᴛᴇsᴛ ᴍᴇssᴀɢᴇ ɪɴ ᴛʜᴇ ᴄʜᴀɴɴᴇʟ ᴀғᴛᴇʀ ᴀᴅᴅɪɴɢ ᴛʜᴇ ʙᴏᴛ.\n"
+                f"3️⃣ ғᴏʀᴡᴀʀᴅ ᴀɴʏ ᴍᴇssᴀɢᴇ ғʀᴏᴍ ᴛʜᴇ ᴄʜᴀɴɴᴇʟ ᴛᴏ ᴛʜɪs ʙᴏᴛ, ᴛʜᴇɴ ᴛʀʏ ᴀɢᴀɪɴ."
+            )
+        else:
+            await message.reply_text(f"{E_ERROR} **ᴇʀʀᴏʀ:** {e}")
 
 @Client.on_message(filters.command("removechannel") & filters.private)
 async def remove_channel(bot: Client, message: Message):
@@ -101,6 +108,7 @@ async def stats(bot: Client, message: Message):
 
 @Client.on_callback_query(filters.regex("^stats$"))
 async def stats_callback(bot: Client, query: CallbackQuery):
+    await query.answer()
     users = await db.get_total_users()
     channels = len(await db.get_all_channels())
     latency = await db.health_check()
@@ -120,6 +128,7 @@ async def admin_panel_callback(bot: Client, query: CallbackQuery):
     if query.from_user.id != OWNER_ID and not await db.is_admin(query.from_user.id):
         return await query.answer("ᴀᴄᴄᴇss ᴅᴇɴɪᴇᴅ!", show_alert=True)
 
+    await query.answer()
     text = HELP_MSG.format(
         banner=T_BANNER,
         divider=T_DIVIDER,

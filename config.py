@@ -18,21 +18,23 @@ def get_env(name: str, default: str = None, is_int: bool = False):
     return value
 
 # Telegram API credentials
-API_ID = 31355944
-API_HASH = "167e960d46363e3098f9c1fc78496adb"
-BOT_TOKEN = "8592003417:AAGonw5Y61jFHS5bq0eWMuqDL7hY84jZ3uI"
+API_ID = get_env("API_ID", "31355944", is_int=True)
+API_HASH = get_env("API_HASH", "167e960d46363e3098f9c1fc78496adb")
+BOT_TOKEN = get_env("BOT_TOKEN", "8592003417:AAGonw5Y61jFHS5bq0eWMuqDL7hY84jZ3uI")
 
 # MongoDB credentials
-MONGO_DB_URI = "mongodb+srv://botskingdom2:t7ognZuINrNfH3tj@cluster0.ystdy4m.mongodb.net/?retryWrites=true&w=majority"
-DB_NAME = "Cluster0"
+MONGO_DB_URI = get_env("MONGO_DB_URI", "mongodb+srv://botskingdom2:t7ognZuINrNfH3tj@cluster0.ystdy4m.mongodb.net/?retryWrites=true&w=majority")
+DB_NAME = get_env("DB_NAME", "Cluster0")
 
 # Owner and Admins
-OWNER_ID = 8557029592
-ADMINS = [8557029592]
+OWNER_ID = get_env("OWNER_ID", "8557029592", is_int=True)
+ADMINS = [OWNER_ID]
+if get_env("ADMINS"):
+    ADMINS.extend([int(x) for x in get_env("ADMINS").split()])
 
 # Optional Configurations
-FSUB_ENABLED = True
-LOG_CHANNEL = -1003840288506
+FSUB_ENABLED = get_env("FSUB_ENABLED", "True") == "True"
+LOG_CHANNEL = get_env("LOG_CHANNEL", "-1003840288506", is_int=True)
 PORT = get_env("PORT", "8080", is_int=True)
 TG_BOT_WORKERS = get_env("TG_BOT_WORKERS", "40", is_int=True)
 

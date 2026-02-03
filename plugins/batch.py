@@ -19,6 +19,7 @@ async def bulk_gen_cmd(bot: Client, message: Message):
 async def bulk_page_callback(bot: Client, query: CallbackQuery):
     if query.from_user.id != OWNER_ID and not await db.is_admin(query.from_user.id):
         return await query.answer("ᴀᴄᴄᴇss ᴅᴇɴɪᴇᴅ!", show_alert=True)
+    await query.answer()
     page = int(query.data.split("_")[2])
     await show_bulk_selection(bot, query, page=page)
 
@@ -61,6 +62,7 @@ async def show_bulk_selection(bot, message_or_query, page):
 async def bulk_select_callback(bot: Client, query: CallbackQuery):
     if query.from_user.id != OWNER_ID and not await db.is_admin(query.from_user.id):
         return await query.answer("ᴀᴄᴄᴇss ᴅᴇɴɪᴇᴅ!", show_alert=True)
+    await query.answer()
     user_id = query.from_user.id
     parts = query.data.split("_")
     channel_id = int(parts[2])
@@ -80,6 +82,7 @@ async def bulk_select_callback(bot: Client, query: CallbackQuery):
 async def bulk_gen_run(bot: Client, query: CallbackQuery):
     if query.from_user.id != OWNER_ID and not await db.is_admin(query.from_user.id):
         return await query.answer("ᴀᴄᴄᴇss ᴅᴇɴɪᴇᴅ!", show_alert=True)
+    await query.answer()
     user_id = query.from_user.id
     if user_id not in selected_channels or not selected_channels[user_id]:
         return await query.answer("sᴇʟᴇᴄᴛ ᴀᴛʟᴇᴀsᴛ ᴏɴᴇ!", show_alert=True)
@@ -108,6 +111,7 @@ async def bulk_gen_run(bot: Client, query: CallbackQuery):
 
 @Client.on_callback_query(filters.regex("^gen_choice_"))
 async def gen_choice_callback(bot: Client, query: CallbackQuery):
+    await query.answer()
     channel_id = int(query.data.split("_")[2])
     buttons = [
         [
@@ -119,6 +123,7 @@ async def gen_choice_callback(bot: Client, query: CallbackQuery):
 
 @Client.on_callback_query(filters.regex("^gen_(norm|req)_"))
 async def gen_link_callback(bot: Client, query: CallbackQuery):
+    await query.answer()
     type = query.data.split("_")[1]
     channel_id = int(query.data.split("_")[2])
     await query.message.edit_text("⏳ **ɢᴇɴᴇʀᴀᴛɪɴɢ...**")
