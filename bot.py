@@ -25,10 +25,12 @@ class Bot(Client):
         self.LOGGER = LOGGER
 
     async def start(self):
+        self.LOGGER(__name__).info("Bot is starting...")
         try:
             await super().start()
 
             # Initialize database indexes
+            self.LOGGER(__name__).info("Initializing database...")
             await db.initialize()
 
             me = await self.get_me()
@@ -73,6 +75,9 @@ if __name__ == "__main__":
     while True:
         try:
             Bot().run()
+        except KeyboardInterrupt:
+            logging.info("Bot stopped by user.")
+            break
         except Exception as e:
             logging.error(f"Critical error in main loop: {e}")
             time.sleep(5) # Delay before restart
