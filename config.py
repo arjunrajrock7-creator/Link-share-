@@ -1,6 +1,10 @@
 import os
 import logging
 from logging.handlers import RotatingFileHandler
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # --- CONFIGURATION ---
 
@@ -9,7 +13,7 @@ def get_env(name: str, default: str = None, is_int: bool = False):
     if is_int:
         try:
             return int(value) if value else 0
-        except ValueError:
+        except (ValueError, TypeError):
             return 0
     return value
 
@@ -32,9 +36,14 @@ ADMINS = [int(x) for x in ADMINS_STR.split()] if ADMINS_STR else []
 FSUB_ENABLED = get_env("FSUB_ENABLED", "True").lower() == "true"
 LOG_CHANNEL = get_env("LOG_CHANNEL", "0", is_int=True)
 PORT = get_env("PORT", "8080", is_int=True)
+TG_BOT_WORKERS = get_env("TG_BOT_WORKERS", "40", is_int=True)
 
 # Bot info
 BOT_USERNAME = get_env("BOT_USERNAME", "") # Will be auto-fetched if not set
+
+# Support Admin
+SUPPORT_ADMIN = "@ALONEKINGSTAR77"
+SUPPORT_LINE = f"<blockquote><b>ᴀɴʏ ɪssᴜᴇ ᴘʟᴇᴀsᴇ ᴄᴏɴᴛᴀᴄᴛ ᴀᴅᴍɪɴ: {SUPPORT_ADMIN}</b></blockquote>"
 
 # --- ANIME THEME UI ---
 
@@ -68,18 +77,19 @@ START_MSG = """
 {revoke} **ᴀᴜᴛᴏ ʀᴇᴠᴏᴋᴇ ɪɴ 5 ᴍɪɴ**
 {bulk} **ʙᴜʟᴋ sᴜᴘᴘᴏʀᴛᴇᴅ**
 {divider}
+{support}
 """
 
 HELP_MSG = """
 {banner}
 {divider}
-**ᴜsᴇʀ ᴄᴏᴍᴍᴀɴᴅs:**
+**ᴜsᴇʀ ᴄᴍᴅs:**
 /start - sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ
 /help - sʜᴏᴡ ʜᴇʟᴘ ᴍᴇɴᴜ
 /channels - sʜᴏᴡ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟs
 /genlink <ᴜʀʟ> - ᴇɴᴄᴏᴅᴇ ᴇxᴛᴇʀɴᴀʟ ʟɪɴᴋ
 
-**ᴀᴅᴍɪɴ ᴄᴏᴍᴍᴀɴᴅs:**
+**ᴀᴅᴍɪɴ ᴄᴍᴅs:**
 /addchannel <ɪᴅ> - ᴀᴅᴅ ɴᴇᴡ ᴄʜᴀɴɴᴇʟ
 /removechannel <ɪᴅ> - ʀᴇᴍᴏᴠᴇ ᴄʜᴀɴɴᴇʟ
 /bulkgen - ɢᴇɴᴇʀᴀᴛᴇ ʟɪɴᴋs ɪɴ ʙᴜʟᴋ
@@ -93,7 +103,9 @@ HELP_MSG = """
 /broadcast - sᴇɴᴅ ᴍᴇssᴀɢᴇ ᴛᴏ ᴀʟʟ
 /stats - sʜᴏᴡ ʙᴏᴛ sᴛᴀᴛs
 /status - ʙᴏᴛ sʏsᴛᴇᴍ sᴛᴀᴛᴜs
+/ping - ʙᴏᴛ ʟᴀᴛᴇɴᴄʏ
 {divider}
+{support}
 """
 
 # --- LOGGING ---

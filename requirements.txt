@@ -1,10 +1,8 @@
 pyrogram
 TgCrypto
-pyromod
 python-dotenv
 pymongo[srv]
 motor
 aiohttp
 asyncio
-aiofiles
 datetime

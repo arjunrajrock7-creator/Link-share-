@@ -5,12 +5,14 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from database.database import db
 from config import *
 from datetime import datetime, timedelta
+from utils.decorators import debounce
 
 def generate_token(length=8):
     characters = string.ascii_letters + string.digits
     return "".join(secrets.choice(characters) for _ in range(length))
 
 @Client.on_message(filters.command("genlink") & filters.private)
+@debounce(1.5)
 async def genlink_handler(bot: Client, message: Message):
     if len(message.command) < 2:
         return await message.reply_text(f"{E_ERROR} **ᴜsᴀɢᴇ:** `/genlink <ᴜʀʟ>`")
@@ -29,11 +31,13 @@ async def genlink_handler(bot: Client, message: Message):
         f"{T_DIVIDER}\n"
         f"{E_SUCCESS} **ʟɪɴᴋ ᴇɴᴄᴏᴅᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ!**\n\n"
         f"**ʙᴏᴛ ʟɪɴᴋ:** `{bot_link}`\n"
-        f"{T_DIVIDER}"
+        f"{T_DIVIDER}\n"
+        f"{SUPPORT_LINE}"
     )
     await message.reply_text(caption)
 
 @Client.on_message(filters.command("link") & filters.private)
+@debounce(1.5)
 async def single_link_gen(bot: Client, message: Message):
     # This is for generating channel invite links
     user_id = message.from_user.id
@@ -86,7 +90,8 @@ async def gen_link_final(bot: Client, query):
             f"{E_LINK} **ʏᴏᴜʀ ɪɴᴠɪᴛᴇ ʟɪɴᴋ:**\n"
             f"`{invite_link}`\n\n"
             f"{E_REVOKE} **ᴇxᴘɪʀᴇs ɪɴ 5 ᴍɪɴᴜᴛᴇs**\n"
-            f"{T_DIVIDER}"
+            f"{T_DIVIDER}\n"
+            f"{SUPPORT_LINE}"
         )
 
         msg = await query.message.edit_text(caption)

@@ -4,11 +4,13 @@ from database.database import db
 from config import *
 import math
 from datetime import datetime, timedelta
+from utils.decorators import debounce
 
 # In-memory storage for selections: {user_id: {channel_id: selected_bool}}
 user_selections = {}
 
 @Client.on_message(filters.command("bulkgen") & filters.private)
+@debounce(2.0)
 async def bulkgen_handler(bot: Client, message: Message):
     user_id = message.from_user.id
     if user_id != OWNER_ID and not await db.is_admin(user_id):
@@ -67,7 +69,7 @@ async def bulk_generate_callback(bot: Client, query):
         except Exception as e:
             result_text += f"📡 **ID: {cid}**\n{E_ERROR} Error: `{str(e)}`\n\n"
 
-    result_text += f"{E_REVOKE} **ᴀʟʟ ʟɪɴᴋs ᴇxᴘɪʀᴇ ɪɴ 5 ᴍɪɴs**\n{T_DIVIDER}"
+    result_text += f"{E_REVOKE} **ᴀʟʟ ʟɪɴᴋs ᴇxᴘɪʀᴇ ɪɴ 5 ᴍɪɴs**\n{T_DIVIDER}\n{SUPPORT_LINE}"
     await query.message.edit_text(result_text)
     user_selections.pop(user_id, None)
 

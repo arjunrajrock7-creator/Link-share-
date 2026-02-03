@@ -1,25 +1,27 @@
-# <p align="center">✨ 𝗦𝗨𝗣𝗘𝗥 𝗟𝗜𝗡𝗞 𝗦𝗛𝗔𝗥𝗘 𝗕𝗢𝗧 ✨</p>
+# <p align="center">⚔️ ✨ 𝗦𝗨𝗣𝗘𝗥 𝗟𝗜𝗡𝗞 𝗦𝗛𝗔𝗥𝗘 𝗕𝗢𝗧 ✨ ⚔️</p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Anime-Themed-pink?style=for-the-badge&logo=appveyor" />
+  <img src="https://img.shields.io/badge/Speed-LightSpeed-yellow?style=for-the-badge&logo=fastapi" />
+  <img src="https://img.shields.io/badge/UI-Anime%20Themed-pink?style=for-the-badge&logo=appveyor" />
   <img src="https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python" />
   <img src="https://img.shields.io/badge/Database-MongoDB-green?style=for-the-badge&logo=mongodb" />
 </p>
 
-━━━━━━━━━━━━━━━
-<p align="center"><b>🔥 𝗨𝗹𝘁𝗿𝗮 𝗙𝗮𝘀𝘁 & 𝗦𝗲𝗰𝘂𝗿𝗲 𝗟𝗶𝗻𝗸 𝗠𝗮𝗻𝗮𝗴𝗲𝗺𝗲𝗻𝘁 🔥</b></p>
-━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+<p align="center"><b>🔥 𝗨𝗹𝘁𝗿𝗮 𝗙𝗮𝘀𝘁, 𝗭𝗲𝗿𝗼 𝗟𝗮𝗴, 𝗣𝗿𝗲𝗺𝗶𝘂𝗺 𝗔𝗻𝗶𝗺𝗲 𝗘𝘅𝗽𝗲𝗿𝗶𝗲𝗻𝗰𝗲 🔥</b></p>
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ## 🚀 𝗙𝗘𝗔𝗧𝗨𝗥𝗘𝗦
-- 🎋 **Anime Themed UI**: Beautiful interface with anime emojis and styles.
-- 📡 **Unlimited Channels**: Add and manage unlimited Telegram channels.
-- 🔗 **Fast Link Generator**: Generate Normal and Join Request links instantly.
-- ⏱️ **Auto Revoke**: Links automatically expire after 5 minutes for safety.
-- 📦 **Bulk Generation**: Generate links for multiple channels at once.
-- 🔐 **Force Subscription**: Mandatory channel join for users.
-- 👨‍💻 **Dynamic Admin System**: Add/remove admins via commands.
-- 📢 **Broadcast**: Send messages to all users with progress tracking.
-- 📊 **Stats & Status**: Monitor bot performance and system status.
+- 🎋 **Light Speed Response**: Millisecond command execution and button clicks.
+- 📡 **Unlimited Channels**: Scalable management of unlimited Telegram channels.
+- 🔗 **Smart Link Generator**: Instant Normal and Join Request link encoding.
+- ⏱️ **Auto Revoke system**: Enhanced safety with automated 5-minute expiry.
+- 📦 **Interactive Bulk Generation**: Multi-select checkbox UI for fast operations.
+- 🔐 **Premium Force Subscription**: Modular and highly stable FSub logic.
+- 👨‍💻 **Advanced Admin Panel**: Powerful tools for dynamic management.
+- 📢 **High-Performance Broadcast**: Mass messaging with real-time progress.
+- 📊 **Millisecond Ping & Status**: Monitor DB and API latency instantly.
+- 🦊 **Anime Themed UI**: Beautifully crafted interface with custom emojis and stylish borders.
 
 ---
 
@@ -35,68 +37,67 @@
 | `OWNER_ID` | Your Telegram User ID (Owner) |
 | `ADMINS` | (Optional) Space-separated Admin IDs |
 | `FSUB_ENABLED` | (Optional) `True` or `False` |
-| `LOG_CHANNEL` | (Optional) Channel ID for logs |
+| `PORT` | (Required for Render) `8080` |
 
 ---
 
-## 📦 𝗗𝗘𝗣𝗟𝗢𝗬𝗠𝗘𝗡𝗧 𝗚𝗨𝗜𝗗𝗘
+## 📦 𝗗𝗘𝗣𝗟𝗢𝗬𝗠𝗘𝗡𝗧 𝗚𝗨𝗜𝗗𝗘𝗦
 
-### 🏠 𝗗𝗲𝗽𝗹𝗼𝘆 𝘁𝗼 𝗩𝗣𝗦
+### 🏠 𝗗𝗲𝗽𝗹𝗼𝘆 𝘁𝗼 𝗩𝗣𝗦 / 𝗧𝗲𝗿𝗺𝘂𝘁
 ```bash
-# Clone the repository
+# Clone the repo
 git clone https://github.com/user/SuperLinkShareBot.git
 cd SuperLinkShareBot
 
-# Create .env file
+# Create .env
 nano .env
 
-# Build and Start with Docker
+# Start with Docker
 docker-compose up -d --build
 ```
 
-### ☁️ 𝗗𝗲𝗽𝗹𝗼𝘆 𝘁𝗼 𝗛𝗲𝗿𝗼𝗸𝘂
-1. Click the **Deploy to Heroku** button (if available).
-2. Fill in the environment variables.
-3. Click **Deploy App**.
+### ☁️ 𝗗𝗲𝗽𝗹𝗼𝘆 𝘁𝗼 𝗥𝗲𝗻𝗱𝗲𝗿.𝗰𝗼𝗺 (𝗥𝗲𝗰𝗼𝗺𝗺𝗲𝗻𝗱𝗲𝗱)
+1. **Connect Repository**: Fork and connect this repo to Render.
+2. **Instance Type**: Select `Web Service`.
+3. **Runtime**: Select `Python`.
+4. **Build Command**: `pip install -r requirements.txt`
+5. **Start Command**: `python3 bot.py`
+6. **Environment Variables**: Add all variables from the table above.
+7. **PORT**: Ensure `PORT` is set to `8080`.
 
-### 🚂 𝗗𝗲𝗽𝗹𝗼𝘆 𝘁𝗼 𝗞𝗼𝘆𝗲𝗯 / 𝗥𝗮𝗶𝗹𝘄𝗮𝘆
-1. Connect your GitHub repository.
-2. Add the environment variables.
-3. Use `python3 bot.py` as the start command.
+### 🚂 𝗗𝗲𝗽𝗹𝗼𝘆 𝘁𝗼 𝗛𝗲𝗿𝗼𝗸𝘂
+1. Click the **Deploy to Heroku** button.
+2. Add necessary config vars.
+3. Enable `worker` dyno.
 
 ---
 
 ## 🎮 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦
 
 ### 👤 𝗨𝘀𝗲𝗿
-- `/start` - Start the bot
-- `/help` - Help menu
-- `/channels` - Show your channels
-- `/genlink <url>` - Encode external link
+- `/start` ➻ Start the bot with anime style.
+- `/help` ➻ Explore help menu.
+- `/channels` ➻ View your connected channels.
+- `/genlink <url>` ➻ Encode any external link.
+- `/ping` ➻ Check millisecond latency.
 
 ### 👨‍💻 𝗔𝗱𝗺𝗶𝗻
-- `/addchannel` - Add new channel
-- `/removechannel` - Remove channel
-- `/bulkgen` - Generate links in bulk
-- `/requeston` - Enable join request
-- `/requestoff` - Disable join request
-- `/fsub_add` - Add fsub channel
-- `/fsub_remove` - Remove fsub channel
-- `/addadmin` - Add new admin
-- `/rmadmin` - Remove admin
-- `/admins` - List all admins
-- `/broadcast` - Send message to all
-- `/stats` - Show bot stats
-- `/status` - Bot system status
+- `/addchannel` ➻ Add new channel to DB.
+- `/removechannel` ➻ Remove channel from DB.
+- `/bulkgen` ➻ interactive bulk generation.
+- `/requeston` ➻ Enable auto-approval.
+- `/requestoff` ➻ Disable auto-approval.
+- `/fsub_add` ➻ Add force sub channel.
+- `/fsub_remove` ➻ Remove force sub channel.
+- `/broadcast` ➻ Send message to all users.
+- `/stats` ➻ View bot usage statistics.
+- `/status` ➻ System health and uptime.
 
 ---
 
-## 📜 𝗖𝗥𝗘𝗗𝗜𝗧𝗦
-- 👤 **sahil** ➻ Base code logic
-- 👤 **obito** ➻ Database & Revoke system
-- 👤 **yato** ➻ Anime UI & Features
-- 👥 **Contributors** ➻ Open source community
+## 🏮 𝗦𝗨𝗣𝗣𝗢𝗥𝗧
+<blockquote><b>Any issue please contact admin: @ALONEKINGSTAR77</b></blockquote>
 
-━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 <p align="center"><b>ᴍᴀᴅᴇ ᴡɪᴛʜ ❤️ ʙʏ ʀᴇxʙᴏᴛs</b></p>
-━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

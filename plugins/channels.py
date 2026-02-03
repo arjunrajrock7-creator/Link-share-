@@ -2,9 +2,11 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from database.database import db
 from config import *
+from utils.decorators import debounce
 import math
 
 @Client.on_message(filters.command("addchannel") & filters.private)
+@debounce(2.0)
 async def add_channel_handler(bot: Client, message: Message):
     user_id = message.from_user.id
     if user_id != OWNER_ID and not await db.is_admin(user_id):
@@ -22,12 +24,14 @@ async def add_channel_handler(bot: Client, message: Message):
         await message.reply_text(
             f"{E_SUCCESS} **ᴄʜᴀɴɴᴇʟ ᴀᴅᴅᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ!**\n\n"
             f"**ɴᴀᴍᴇ:** {chat.title}\n"
-            f"**ɪᴅ:** `{channel_id}`"
+            f"**ɪᴅ:** `{channel_id}`\n\n"
+            f"{SUPPORT_LINE}"
         )
     except Exception as e:
         await message.reply_text(f"{E_ERROR} **ᴇʀʀᴏʀ:** `{str(e)}`")
 
 @Client.on_message(filters.command("removechannel") & filters.private)
+@debounce(2.0)
 async def remove_channel_handler(bot: Client, message: Message):
     user_id = message.from_user.id
     if user_id != OWNER_ID and not await db.is_admin(user_id):
@@ -39,11 +43,12 @@ async def remove_channel_handler(bot: Client, message: Message):
     try:
         channel_id = int(message.command[1])
         await db.remove_channel(channel_id)
-        await message.reply_text(f"{E_SUCCESS} **ᴄʜᴀɴɴᴇʟ ʀᴇᴍᴏᴠᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ!**")
+        await message.reply_text(f"{E_SUCCESS} **ᴄʜᴀɴɴᴇʟ ʀᴇᴍᴏᴠᴇᴅ sᴜᴄᴄᴇssғᴜʟʟʏ!**\n\n{SUPPORT_LINE}")
     except Exception as e:
         await message.reply_text(f"{E_ERROR} **ᴇʀʀᴏʀ:** `{str(e)}`")
 
 @Client.on_message(filters.command("channels") & filters.private)
+@debounce(1.5)
 async def channels_list_handler(bot: Client, message: Message):
     await show_channels(bot, message, page=1)
 
@@ -75,6 +80,7 @@ async def show_channels(bot, message, page=1, is_callback=False):
         text += f"📡 **{ch['title']}**\nID: `{ch['_id']}`\nsᴛᴀᴛᴜs: {status}\n\n"
 
     text += T_DIVIDER
+    text += f"\n{SUPPORT_LINE}"
 
     buttons = []
     nav = []

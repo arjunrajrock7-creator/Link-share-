@@ -4,6 +4,7 @@ from pyrogram.errors import UserNotParticipant
 from database.database import db
 from config import *
 from functools import wraps
+from utils.decorators import debounce
 
 async def is_subscribed(bot: Client, user_id: int):
     if not FSUB_ENABLED:
@@ -54,13 +55,15 @@ def force_sub(func):
                 f"{T_DIVIDER}\n"
                 f"{E_FSUB} **ᴀᴄᴄᴇss ᴅᴇɴɪᴇᴅ!**\n\n"
                 f"ʏᴏᴜ ᴍᴜsᴛ ᴊᴏɪɴ ᴏᴜʀ ᴄʜᴀɴɴᴇʟs ʙᴇғᴏʀᴇ ᴜsɪɴɢ ᴛʜᴇ ʙᴏᴛ.\n"
-                f"{T_DIVIDER}"
+                f"{T_DIVIDER}\n"
+                f"{SUPPORT_LINE}"
             )
             return await message.reply_text(caption, reply_markup=InlineKeyboardMarkup(buttons))
         return await func(bot, message, *args, **kwargs)
     return wrapper
 
 @Client.on_message(filters.command("fsub_add") & filters.private)
+@debounce(2.0)
 async def fsub_add_handler(bot: Client, message: Message):
     user_id = message.from_user.id
     if user_id != OWNER_ID:
@@ -72,11 +75,12 @@ async def fsub_add_handler(bot: Client, message: Message):
     try:
         channel_id = int(message.command[1])
         await db.add_fsub(channel_id)
-        await message.reply_text(f"{E_SUCCESS} **ғsᴜʙ ᴄʜᴀɴɴᴇʟ ᴀᴅᴅᴇᴅ!**")
+        await message.reply_text(f"{E_SUCCESS} **ғsᴜʙ ᴄʜᴀɴɴᴇʟ ᴀᴅᴅᴇᴅ!**\n\n{SUPPORT_LINE}")
     except Exception as e:
         await message.reply_text(f"{E_ERROR} **ᴇʀʀᴏʀ:** `{str(e)}`")
 
 @Client.on_message(filters.command("fsub_remove") & filters.private)
+@debounce(2.0)
 async def fsub_remove_handler(bot: Client, message: Message):
     user_id = message.from_user.id
     if user_id != OWNER_ID:
@@ -88,6 +92,6 @@ async def fsub_remove_handler(bot: Client, message: Message):
     try:
         channel_id = int(message.command[1])
         await db.remove_fsub(channel_id)
-        await message.reply_text(f"{E_SUCCESS} **ғsᴜʙ ᴄʜᴀɴɴᴇʟ ʀᴇᴍᴏᴠᴇᴅ!**")
+        await message.reply_text(f"{E_SUCCESS} **ғsᴜʙ ᴄʜᴀɴɴᴇʟ ʀᴇᴍᴏᴠᴇᴅ!**\n\n{SUPPORT_LINE}")
     except Exception as e:
         await message.reply_text(f"{E_ERROR} **ᴇʀʀᴏʀ:** `{str(e)}`")

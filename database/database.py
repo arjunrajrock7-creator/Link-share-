@@ -1,14 +1,39 @@
 import motor.motor_asyncio
 import logging
+import asyncio
+import time
 from datetime import datetime, timedelta
-from typing import List, Optional, Union
+from typing import List, Optional, Union, Dict
 from config import MONGO_DB_URI, DB_NAME
 
 logger = logging.getLogger(__name__)
 
+class TTLCache:
+    def __init__(self, ttl_seconds: int):
+        self.ttl = ttl_seconds
+        self.cache: Dict[str, tuple] = {}
+
+    def get(self, key: str):
+        if key in self.cache:
+            val, timestamp = self.cache[key]
+            if time.time() - timestamp < self.ttl:
+                return val
+            else:
+                del self.cache[key]
+        return None
+
+    def set(self, key: str, value):
+        self.cache[key] = (value, time.time())
+
 class Database:
     def __init__(self, uri, name):
-        self._client = motor.motor_asyncio.AsyncIOMotorClient(uri)
+        # Optimized connection pooling for high concurrency
+        self._client = motor.motor_asyncio.AsyncIOMotorClient(
+            uri,
+            maxPoolSize=100,
+            minPoolSize=10,
+            waitQueueTimeoutMS=5000
+        )
         self.db = self._client[name]
         self.users = self.db.users
         self.channels = self.db.channels
@@ -16,6 +41,27 @@ class Database:
         self.links = self.db.links
         self.fsub = self.db.fsub
         self.external_links = self.db.external_links
+
+        # In-memory TTL caches
+        self.admin_cache = TTLCache(ttl_seconds=300) # 5 minutes
+        self.link_cache = TTLCache(ttl_seconds=60)    # 1 minute
+
+    async def initialize(self):
+        """Initializes database indexes."""
+        try:
+            await self.users.create_index("_id")
+            await self.channels.create_index("_id")
+            await self.external_links.create_index("token", unique=True)
+            await self.links.create_index("expiry_time")
+            logger.info("Database indexes created successfully.")
+        except Exception as e:
+            logger.error(f"Error creating indexes: {e}")
+
+    async def health_check(self) -> float:
+        """Returns the DB latency in milliseconds."""
+        start = time.time()
+        await self.db.command("ping")
+        return round((time.time() - start) * 1000, 2)
 
     # --- USER METHODS ---
     async def add_user(self, user_id: int, username: str = None):
@@ -38,13 +84,21 @@ class Database:
     # --- ADMIN METHODS ---
     async def add_admin(self, user_id: int):
         await self.admins.update_one({"_id": user_id}, {"$set": {"_id": user_id}}, upsert=True)
+        self.admin_cache.set(str(user_id), True)
 
     async def remove_admin(self, user_id: int):
         await self.admins.delete_one({"_id": user_id})
+        self.admin_cache.set(str(user_id), False)
 
     async def is_admin(self, user_id: int):
+        cache_val = self.admin_cache.get(str(user_id))
+        if cache_val is not None:
+            return cache_val
+
         admin = await self.admins.find_one({"_id": user_id})
-        return bool(admin)
+        is_adm = bool(admin)
+        self.admin_cache.set(str(user_id), is_adm)
+        return is_adm
 
     async def get_all_admins(self) -> List[int]:
         admins = await self.admins.find({}).to_list(length=None)
@@ -95,9 +149,17 @@ class Database:
             {"$set": {"token": token, "url": url, "created_at": datetime.utcnow()}},
             upsert=True
         )
+        self.link_cache.set(token, {"url": url})
 
     async def get_external_link(self, token: str):
-        return await self.external_links.find_one({"token": token})
+        cache_val = self.link_cache.get(token)
+        if cache_val:
+            return cache_val
+
+        link = await self.external_links.find_one({"token": token})
+        if link:
+            self.link_cache.set(token, link)
+        return link
 
     # --- FSUB METHODS ---
     async def add_fsub(self, channel_id: int):

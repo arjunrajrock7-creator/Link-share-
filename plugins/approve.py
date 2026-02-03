@@ -3,6 +3,9 @@ from pyrogram.types import ChatJoinRequest, InlineKeyboardMarkup, InlineKeyboard
 from database.database import db
 from config import *
 import asyncio
+import logging
+
+logger = logging.getLogger(__name__)
 
 @Client.on_chat_join_request()
 async def auto_approve(bot: Client, request: ChatJoinRequest):
@@ -19,16 +22,17 @@ async def auto_approve(bot: Client, request: ChatJoinRequest):
             caption = (
                 f"{T_BANNER}\n"
                 f"{T_DIVIDER}\n"
-                f"{E_SUCCESS} **ᴊᴏɪɴ ʀᴇǫᴜᴇsᴛ ᴀᴘᴘʀᴏᴠᴇᴅ!**\n\n"
+                f"{E_SUCCESS} **ᴊᴏɪɴ ʀᴇǫᴜᴇsᴛ ᴀᴘᴘʀᴏᴠᴀʟ!**\n\n"
                 f"ʜᴇʟʟᴏ {request.from_user.mention},\n"
                 f"ʏᴏᴜ ʜᴀᴠᴇ ʙᴇᴇɴ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴀᴘᴘʀᴏᴠᴇᴅ ᴛᴏ ᴊᴏɪɴ **{request.chat.title}**.\n"
-                f"{T_DIVIDER}"
+                f"{T_DIVIDER}\n"
+                f"{SUPPORT_LINE}"
             )
 
             try:
                 await bot.send_message(user_id, caption)
-            except:
-                pass # User might have blocked the bot
+            except Exception as e:
+                logger.debug(f"Failed to send approval message to {user_id}: {e}")
 
         except Exception as e:
-            print(f"Error approving join request: {e}")
+            logger.error(f"Error approving join request for user {user_id} in chat {chat_id}: {e}")
