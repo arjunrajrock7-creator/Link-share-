@@ -9,7 +9,7 @@ from utils.pagination import get_pagination
 CHANNELS_PER_PAGE = 10
 selected_channels = {} # user_id: [channel_ids]
 
-@Client.on_message(filters.command("bulkgen") & filters.private)
+@Client.on_message(filters.command(["bulkgen", "batch"]) & filters.private)
 async def bulk_gen_cmd(bot: Client, message: Message):
     if message.from_user.id != OWNER_ID and not await db.is_admin(message.from_user.id):
         return

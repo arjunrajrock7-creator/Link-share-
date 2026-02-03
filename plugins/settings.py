@@ -33,7 +33,7 @@ async def auto_revoke_task(bot: Client):
             logging.error(f"Error in auto_revoke_task: {e}")
         await asyncio.sleep(60)
 
-@Client.on_message(filters.command("channels") & filters.private)
+@Client.on_message(filters.command(["channels", "settings"]) & filters.private)
 async def channels_cmd(bot: Client, message: Message):
     await show_channels(bot, message, page=1)
 

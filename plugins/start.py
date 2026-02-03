@@ -82,7 +82,7 @@ async def help_handler(bot: Client, message: Message):
     except:
         await message.reply_text(caption)
 
-@Client.on_message(filters.private & ~filters.command(["start", "help", "channels", "genlink", "bulkgen", "requeston", "requestoff", "addadmin", "rmadmin", "admins", "broadcast", "stats", "status", "ping", "fsub_add", "fsub_remove", "addchannel", "removechannel"]))
+@Client.on_message(filters.private & ~filters.command(["start", "help", "channels", "settings", "genlink", "bulkgen", "batch", "requeston", "requestoff", "addadmin", "rmadmin", "admins", "broadcast", "stats", "status", "ping", "fsub_add", "fsub_remove", "addchannel", "removechannel"]))
 @force_sub
 async def search_handler(bot: Client, message: Message):
     query = message.text
