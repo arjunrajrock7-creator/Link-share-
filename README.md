@@ -1,103 +1,93 @@
-# <p align="center">🌈 ✨ 𝗦𝗨𝗣𝗘𝗥 𝗟𝗜𝗡𝗞 𝗦𝗛𝗔𝗥𝗘 𝗕𝗢𝗧 ✨ 🌈</p>
+# ─「<u>Lɪɴᴋ sʜᴀʀᴇ ʙᴏᴛ</u>」─
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Speed-LightSpeed-red?style=for-the-badge&logo=fastapi" />
-  <img src="https://img.shields.io/badge/UI-Anime%20Themed-orange?style=for-the-badge&logo=appveyor" />
-  <img src="https://img.shields.io/badge/Python-3.10+-yellow?style=for-the-badge&logo=python" />
-  <img src="https://img.shields.io/badge/Database-MongoDB-green?style=for-the-badge&logo=mongodb" />
-  <img src="https://img.shields.io/badge/Security-Auto%20Revoke-blue?style=for-the-badge&logo=shield" />
-  <img src="https://img.shields.io/badge/Status-Ultra%20Stable-indigo?style=for-the-badge&logo=render" />
+  <img src="assets/img.jpg" alt="Bot Channels" width="1920"/>
 </p>
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-<p align="center"><b>🔥 𝗨𝗹𝘁𝗿𝗮 𝗙𝗮𝘀𝘁, 𝗭𝗲𝗿𝗼 𝗟𝗮𝗴, 𝗣𝗿𝗲𝗺𝗶𝘂𝗺 𝗔𝗻𝗶𝗺𝗲 𝗘𝘅𝗽𝗲𝗿𝗶𝗲𝗻𝗰𝗲 🔥</b></p>
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+![Typing SVG](https://readme-typing-svg.herokuapp.com/?lines=THIS+IS+A+ADVANCE+LINK+SHARE!+BOT;CREATED+BY+REX+BOTS)</p>
+</p>
 
-## 🎋 𝗙𝗘𝗔𝗧𝗨𝗥𝗘𝗦
-- ⚡ **Light Speed Response**: Powered by Pyrogram + Motor for millisecond execution.
-- 📡 **Unlimited Channels**: Manage as many channels as you need with ease.
-- 🔗 **Smart Link Generator**: Generate Normal and Join Request links instantly.
-- ⏱️ **Auto Revoke system**: Links expire automatically after 5 minutes for copyright safety.
-- 📦 **Bulk Generation**: Interactive checkbox-style UI for generating multiple links.
-- 🔐 **Force Subscription**: Integrated FSub system to grow your audience.
-- 👨‍💻 **Dynamic Admin Panel**: Add/Remove admins on the fly via commands.
-- 📢 **Robust Broadcast**: Send messages to all users with real-time progress tracking.
-- 📊 **Detailed Stats**: Monitor user count, channel count, and link generation history.
-- 🦊 **Anime Themed UI**: Beautiful Unicode styling and anime-themed messages everywhere.
+<b><i>A powerful and dynamic Telegram bot designed to share links from specific channels, protecting them from copyright issues. It features a fully interactive, button-based UI and can be configured dynamically by the owner.</i></b>
 
 ---
 
-## 🛠️ 𝗗𝗘𝗣𝗟𝗢𝗬𝗠𝗘𝗡𝗧 𝗩𝗔𝗥𝗜𝗔𝗕𝗟𝗘𝗦 (𝗘𝗡𝗩)
+## 🚀 Features
 
-| Variable | Description | Default |
-|:---|:---|:---|
-| `API_ID` | 🔴 **REQUIRED**: Your Telegram API ID | - |
-| `API_HASH` | 🟠 **REQUIRED**: Your Telegram API Hash | - |
-| `BOT_TOKEN` | 🟡 **REQUIRED**: Your Telegram Bot Token | - |
-| `MONGO_DB_URI` | 🟢 **REQUIRED**: MongoDB Connection URI | - |
-| `OWNER_ID` | 🔵 **REQUIRED**: Your Telegram User ID | - |
-| `DB_NAME` | 🟣 Database Name | `SuperLinkShareBot` |
-| `ADMINS` | ⚪ Space-separated Admin IDs | - |
-| `FSUB_ENABLED` | 🔐 Enable Force Sub (`True`/`False`) | `True` |
-| `PORT` | 🌐 Port for health checks | `8080` |
+-   **Advanced Link Sharing:** _Securely share links from your channels._
+-   **FORCE SUBSCRIBE:** _Ensure users join designated channels before they can access links._
+-   **Button-Based UI:** _Modern, easy-to-use interface with inline buttons instead of text commands._
+-   **Dynamic Content:** _Rich messages with images and styled text using blockquotes._
+-   **In-Bot Configuration:** _The bot owner can manage all important settings directly from the bot's UI._
+-   **Secure:** _No hardcoded credentials. All sensitive information is loaded from environment variables._
 
 ---
 
-## 🚀 𝗗𝗘𝗣𝗟𝗢𝗬𝗠𝗘𝗡𝗧 𝗚𝗨𝗜𝗗𝗘 (𝟭𝟬𝟬% 𝗦𝗨𝗖𝗖𝗘𝗦𝗦)
+## 🤖 Bot Commands
 
-### 🐳 𝗗𝗲𝗽𝗹𝗼𝘆 𝘄𝗶𝘁𝗵 𝗗𝗼𝗰𝗸𝗲𝗿 (𝗥𝗲𝗰𝗼𝗺𝗺𝗲𝗻𝗱𝗲𝗱)
-```bash
-# Clone the repository
-git clone https://github.com/abhinai2244/LINK-SHAREBOT.git
-cd LINK-SHAREBOT
-
-# Edit .env file
-nano .env
-
-# Build and Start
-docker-compose up -d --build
+```
+/start - Sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ
+/settings - Tᴏ ᴄʜᴀɴɢᴇ ᴛʜᴇ ʙᴏᴛ sᴇᴛᴛɪɴɢs ᴅʏɴᴀᴍɪᴄᴀʟʟʏ (ᴀᴅᴍɪɴ)
+/genlink - Tᴏ ᴄʀᴇᴀᴛᴇ ʟɪɴᴋs sɪɴɢʟᴇ (ᴀᴅᴍɪɴ)
+/batch - Tᴏ ᴄʀᴇᴀᴛᴇ ʟɪɴᴋs ɪɴ ᴀ ʙᴀᴛᴄʜ (ᴀᴅᴍɪɴ)
+/broadcast - Tᴏ ʙʀᴏᴀᴅᴄᴀsᴛ Yᴏᴜʀ ᴍᴇssᴀɢᴇ (ᴀᴅᴍɪɴ)
 ```
 
-### ☁️ 𝗗𝗲𝗽𝗹𝗼𝘆 𝘁𝗼 𝗥𝗲𝗻𝗱𝗲𝗿.𝗰𝗼𝗺
-1. **Fork** this repository.
-2. Create a new **Web Service** on Render.
-3. Connect your fork.
-4. **Environment**: `Docker` (Select Docker for 100% success rate with TgCrypto).
-5. **Advanced**: Add all variables from the table above.
-6. **Deploy!** 🚀
+---
 
-### 🚂 𝗗𝗲𝗽𝗹𝗼𝘆 𝘁𝗼 𝗛𝗲𝗿𝗼𝗸𝘂
-1. Click **Deploy to Heroku**.
-2. Fill in the variables.
-3. Enable `worker` dyno.
+## 🛠️ How to Deploy
+
+_You can easily deploy this bot yourself. Follow the steps below._
+
+### **Prerequisites**
+
+-   _A Telegram Bot Token. Get one from [@BotFather](https://t.me/BotFather)._
+-   _Your Telegram API ID and API Hash. Get them from [my.telegram.org](https://my.telegram.org)._
+-   _A MongoDB database URL. Get one for free from [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)._
+
+### **Deployment Steps**
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/abhinai2244/LINK-SHAREBOT.git
+    cd LINK-SHAREBOT
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3.  **Set up Environment Variables:**
+    Create a `.env` file in the root directory or set the following environment variables in your deployment environment:
+
+    | Variable           | Description                                             |
+    | ------------------ | ------------------------------------------------------- |
+    | `TG_BOT_TOKEN`     | Your Telegram bot token from @BotFather.                |
+    | `API_ID`           | Your Telegram App ID.                                   |
+    | `API_HASH`         | Your Telegram App Hash.                                 |
+    | `DB_URI`           | Your MongoDB connection URL.                            |
+    | `OWNER_ID`         | Your numerical Telegram User ID.                        |
+    | `DATABASE_CHANNEL` | The ID of the channel where the bot will send logs/notifications. |
+
+    **Optional Variables:**
+    You can customize the bot further with these optional variables: `DB_NAME`, `START_PIC`, `FSUB_PIC`, `HELP_PIC`, etc.
+
+4.  **Run the bot:**
+    ```bash
+    python3 bot.py
+    ```
 
 ---
 
-## 🎮 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 𝗟𝗜𝗦𝗧
+## Credits:-
 
-### 👤 **User Commands**
-- `/start` ➻ Start the anime journey.
-- `/help` ➻ View commands and usage.
-- `/channels` ➻ See your authorized channels.
-- `/genlink <url>` ➻ Securely encode any external URL.
+_This bot was made possible with the help and support of the following individuals:_
 
-### 👨‍💻 **Admin Commands**
-- `/addchannel` ➻ Add new channel (-100xxxx).
-- `/removechannel` ➻ Remove channel from DB.
-- `/bulkgen` ➻ Start bulk generation flow.
-- `/requeston`/`off` ➻ Toggle join request approval.
-- `/fsub_add`/`remove` ➻ Manage force sub channels.
-- `/addadmin`/`rmadmin` ➻ Manage bot admins.
-- `/broadcast` ➻ Send global announcements.
-- `/stats` / `/status` ➻ System health & metrics.
+-   **[ABHINAI](https://t.me/about_zani)**
+-   **[ABHINAV](https://t.me/adityaabhinav)**
+-   **[MASTER](https://t.me/V_Sbotmaker)**
 
+- **[REx BOTs](https://t.me/RexBots_Official)**
+
+- **Base Repo**:- **[CodeFlix](https://github.com/Codeflix-Bots/Links-Share-Bot.git)**
 ---
-
-## 🏮 𝗖𝗥𝗘𝗗𝗜𝗧𝗦
-- ⚡ **Owner**: **⚡𝗛𝗘𝗠𝗔𝗡𝗧𝗛⚡**
-- 🛠️ **Developer**: **[Sahil](https://github.com/abhinai2244)**
-- 🎋 **Contributors**: Obito, Yato, RexBots
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-<p align="center"><b>ᴍᴀᴅᴇ ᴡɪᴛʜ ❤️ ʙʏ ⚡𝗛𝗘𝗠𝗔𝗡𝗧𝗛⚡</b></p>
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

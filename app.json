@@ -1,59 +1,53 @@
 {
-  "name": "Super Link Share Bot",
-  "description": "Super Link Share Bot with Anime Theme, Auto Revoke, and Bulk Generation.",
-  "repository": "https://github.com/abhinai2244/LINK-SHAREBOT",
+  "name": "TG File links/Sharing Bot",
+  "description": "link sharing bot. you can share you private links",
   "keywords": [
     "telegram",
-    "bot",
-    "pyrogram",
-    "linkshare",
-    "anime"
+    "links",
+    "sharing"
   ],
+  "repository": "https://github.com/",
+  "logo": "https://ibb.co/mVkSySr7",
   "env": {
-    "API_ID": {
-      "description": "Your Telegram API ID",
-      "required": true
-    },
-    "API_HASH": {
-      "description": "Your Telegram API Hash",
-      "required": true
-    },
-    "BOT_TOKEN": {
-      "description": "Your Telegram Bot Token",
-      "required": true
-    },
-    "MONGO_DB_URI": {
-      "description": "Your MongoDB Connection URI",
-      "required": true
-    },
-    "DB_NAME": {
-      "description": "Your MongoDB Database Name",
-      "value": "SuperLinkShareBot",
-      "required": false
+    "TG_BOT_TOKEN": {
+      "description": "Your Bot token, Get it from @Botfather",
+      "value": ""
     },
     "OWNER_ID": {
-      "description": "Your Telegram User ID",
-      "required": true
+      "description": "An integer of consisting of your owner ID",
+      "value": ""
+    },
+    "APP_ID":{
+      "description": "your app id, take it from my.telegram.org",
+      "value": ""
+    },
+    "DATABASE_URL": {
+      "description": "Paste your mongo db url",
+      "value": "url"
+    },
+    "DATABASE_NAME":{
+      "description": "Enter your DATABASE_NAME ",
+      "value": "linkssharing"
+    },
+    "API_HASH":{
+      "description": "your api hash, take it from my.telegram.org",
+      "value": ""
     },
     "ADMINS": {
-      "description": "Space-separated Admin IDs",
-      "required": false
-    },
-    "FSUB_ENABLED": {
-      "description": "Force Subscription (True/False)",
-      "value": "True",
-      "required": false
-    },
-    "LOG_CHANNEL": {
-      "description": "Channel ID for logs",
+      "description": "A space separated list of user_ids of Admins, they can only create links",
+      "value": "",
       "required": false
     }
   },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
   "formation": {
     "worker": {
       "quantity": 1,
-      "size": "free"
+      "size": "basic"
     }
-  },
-  "stack": "container"
+  }
 }

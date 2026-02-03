@@ -1,3 +1,5 @@
 from bot import Bot
+import logging
 
-Bot().run()
+if __name__ == "__main__":
+    Bot().run()
