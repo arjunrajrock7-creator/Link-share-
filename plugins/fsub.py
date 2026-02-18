@@ -74,9 +74,9 @@ async def check_fsub_callback(bot: Client, query: CallbackQuery):
     user_id = query.from_user.id
     reply_markup = await get_fsub_buttons(bot, user_id)
     if reply_markup:
-        await query.answer("❌ ʏᴏᴜ ʜᴀᴠᴇɴ'ᴛ ᴊᴏɪɴᴇᴅ ᴀʟʟ ᴄʜᴀɴɴᴇʟs!", show_alert=True)
+        await query.answer(f"{E_ERROR} ʏᴏᴜ ʜᴀᴠᴇɴ'ᴛ ᴊᴏɪɴᴇᴅ ᴀʟʟ ᴄʜᴀɴɴᴇʟs!", show_alert=True)
     else:
-        await query.answer("✅ ᴛʜᴀɴᴋ ʏᴏᴜ ғᴏʀ ᴊᴏɪɴɪɴɢ!", show_alert=True)
+        await query.answer(f"{E_SUCCESS} ᴛʜᴀɴᴋ ʏᴏᴜ ғᴏʀ ᴊᴏɪɴɪɴɢ!", show_alert=True)
         await query.message.delete()
         # After joining, user can send /start again or just continue.
         # We don't want to cause circular import.

@@ -9,7 +9,7 @@ from utils.pagination import get_pagination
 CHANNELS_PER_PAGE = 10
 selected_channels = {} # user_id: [channel_ids]
 
-@Client.on_message(filters.command("bulkgen") & filters.private)
+@Client.on_message(filters.command(["bulkgen", "batch"]) & filters.private)
 async def bulk_gen_cmd(bot: Client, message: Message):
     if message.from_user.id != OWNER_ID and not await db.is_admin(message.from_user.id):
         return
@@ -17,6 +17,9 @@ async def bulk_gen_cmd(bot: Client, message: Message):
 
 @Client.on_callback_query(filters.regex(r"^bulk_page_(\d+)$"))
 async def bulk_page_callback(bot: Client, query: CallbackQuery):
+    if query.from_user.id != OWNER_ID and not await db.is_admin(query.from_user.id):
+        return await query.answer("ᴀᴄᴄᴇss ᴅᴇɴɪᴇᴅ!", show_alert=True)
+    await query.answer()
     page = int(query.data.split("_")[2])
     await show_bulk_selection(bot, query, page=page)
 
@@ -57,6 +60,9 @@ async def show_bulk_selection(bot, message_or_query, page):
 
 @Client.on_callback_query(filters.regex("^bulk_select_"))
 async def bulk_select_callback(bot: Client, query: CallbackQuery):
+    if query.from_user.id != OWNER_ID and not await db.is_admin(query.from_user.id):
+        return await query.answer("ᴀᴄᴄᴇss ᴅᴇɴɪᴇᴅ!", show_alert=True)
+    await query.answer()
     user_id = query.from_user.id
     parts = query.data.split("_")
     channel_id = int(parts[2])
@@ -74,6 +80,9 @@ async def bulk_select_callback(bot: Client, query: CallbackQuery):
 
 @Client.on_callback_query(filters.regex("^bulk_gen_run$"))
 async def bulk_gen_run(bot: Client, query: CallbackQuery):
+    if query.from_user.id != OWNER_ID and not await db.is_admin(query.from_user.id):
+        return await query.answer("ᴀᴄᴄᴇss ᴅᴇɴɪᴇᴅ!", show_alert=True)
+    await query.answer()
     user_id = query.from_user.id
     if user_id not in selected_channels or not selected_channels[user_id]:
         return await query.answer("sᴇʟᴇᴄᴛ ᴀᴛʟᴇᴀsᴛ ᴏɴᴇ!", show_alert=True)
@@ -102,6 +111,7 @@ async def bulk_gen_run(bot: Client, query: CallbackQuery):
 
 @Client.on_callback_query(filters.regex("^gen_choice_"))
 async def gen_choice_callback(bot: Client, query: CallbackQuery):
+    await query.answer()
     channel_id = int(query.data.split("_")[2])
     buttons = [
         [
@@ -113,6 +123,7 @@ async def gen_choice_callback(bot: Client, query: CallbackQuery):
 
 @Client.on_callback_query(filters.regex("^gen_(norm|req)_"))
 async def gen_link_callback(bot: Client, query: CallbackQuery):
+    await query.answer()
     type = query.data.split("_")[1]
     channel_id = int(query.data.split("_")[2])
     await query.message.edit_text("⏳ **ɢᴇɴᴇʀᴀᴛɪɴɢ...**")
@@ -127,4 +138,4 @@ async def gen_link_callback(bot: Client, query: CallbackQuery):
         await query.message.edit_text(text)
         await db.save_generated_link(channel_id, link_obj.invite_link, query.message.id, query.from_user.id, expiry)
     except Exception as e:
-        await query.message.edit_text(f"❌ **ᴇʀʀᴏʀ:** {e}")
+        await query.message.edit_text(f"{E_ERROR} **ᴇʀʀᴏʀ:** {e}")

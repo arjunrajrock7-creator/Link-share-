@@ -23,17 +23,18 @@ API_HASH = get_env("API_HASH", "167e960d46363e3098f9c1fc78496adb")
 BOT_TOKEN = get_env("BOT_TOKEN", "8592003417:AAGonw5Y61jFHS5bq0eWMuqDL7hY84jZ3uI")
 
 # MongoDB credentials
-MONGO_DB_URI = get_env("MONGO_DB_URI", "mongodb+srv://botskingdom2:t7ognZuINrNfH3tj@cluster0.ystdy4m.mongodb.net/?retryWrites=true&w=majority")
+MONGO_DB_URI = get_env("MONGO_DB_URI", get_env("DB_URI", "mongodb+srv://botskingdom2:t7ognZuINrNfH3tj@cluster0.ystdy4m.mongodb.net/?retryWrites=true&w=majority"))
 DB_NAME = get_env("DB_NAME", "Cluster0")
 
 # Owner and Admins
 OWNER_ID = get_env("OWNER_ID", "8557029592", is_int=True)
-ADMINS_STR = get_env("ADMINS", "8557029592")
-ADMINS = [int(x) for x in ADMINS_STR.split()] if ADMINS_STR else []
+ADMINS = [OWNER_ID]
+if get_env("ADMINS"):
+    ADMINS.extend([int(x) for x in get_env("ADMINS").split()])
 
 # Optional Configurations
-FSUB_ENABLED = get_env("FSUB_ENABLED", "True").lower() == "true"
-LOG_CHANNEL = get_env("LOG_CHANNEL", "-1003840288506", is_int=True)
+FSUB_ENABLED = get_env("FSUB_ENABLED", "True") == "True"
+LOG_CHANNEL = get_env("LOG_CHANNEL", get_env("DATABASE_CHANNEL", "-1003840288506"), is_int=True)
 PORT = get_env("PORT", "8080", is_int=True)
 TG_BOT_WORKERS = get_env("TG_BOT_WORKERS", "40", is_int=True)
 
@@ -70,9 +71,7 @@ START_MSG = """
 
 🎋 **Hᴇʟʟᴏ {mention}**
 
-📌 **Sᴇɴᴅ ᴍᴇ ᴀɴ Aɴɪᴍᴇ/Mᴏᴠɪᴇ/Sᴇʀɪᴇs ɴᴀᴍᴇ**
-🔍 **I ᴡɪʟʟ sᴇᴀʀᴄʜ ғʀᴏᴍ ᴍʏ DB Cʜᴀɴɴᴇʟs**
-🔗 **I ᴡɪʟʟ sᴇɴᴅ ᴊᴏɪɴ ʟɪɴᴋs / ᴘᴏsᴛ ʟɪɴᴋs ɪɴsᴛᴀɴᴛʟʏ**
+**CHECK MY FEATURES IN BELOW TO USE FIX ERRORS**
 
 ⚡ **Fᴀsᴛ • Cʟᴇᴀɴ • Pʀᴇᴍɪᴜᴍ UI**
 {divider}
@@ -82,24 +81,21 @@ START_MSG = """
 HELP_MSG = """
 {banner}
 {divider}
-**ᴜsᴇʀ ᴄᴍᴅs:**
+**ʙᴏᴛ ᴄᴏᴍᴍᴀɴᴅs:**
 /start - sᴛᴀʀᴛ ᴛʜᴇ ʙᴏᴛ
-/help - sʜᴏᴡ ʜᴇʟᴘ ᴍᴇɴᴜ
-/channels - sʜᴏᴡ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟs
-/genlink <ᴜʀʟ> - ᴇɴᴄᴏᴅᴇ ᴇxᴛᴇʀɴᴀʟ ʟɪɴᴋ
+/settings - ᴛᴏ ᴄʜᴀɴɢᴇ ᴛʜᴇ ʙᴏᴛ sᴇᴛᴛɪɴɢs (ᴀᴅᴍɪɴ)
+/genlink - ᴛᴏ ᴄʀᴇᴀᴛᴇ ʟɪɴᴋs sɪɴɢʟᴇ (ᴀᴅᴍɪɴ)
+/batch - ᴛᴏ ᴄʀᴇᴀᴛᴇ ʟɪɴᴋs ɪɴ ᴀ ʙᴀᴛᴄʜ (ᴀᴅᴍɪɴ)
+/broadcast - ᴛᴏ ʙʀᴏᴀᴅᴄᴀsᴛ ʏᴏᴜʀ ᴍᴇssᴀɢᴇ (ᴀᴅᴍɪɴ)
 
-**ᴀᴅᴍɪɴ ᴄᴍᴅs:**
+**ᴏᴛʜᴇʀ ᴄᴍᴅs:**
+/channels - sʜᴏᴡ ʏᴏᴜʀ ᴄʜᴀɴɴᴇʟs
 /addchannel <ɪᴅ> - ᴀᴅᴅ ɴᴇᴡ ᴄʜᴀɴɴᴇʟ
 /removechannel <ɪᴅ> - ʀᴇᴍᴏᴠᴇ ᴄʜᴀɴɴᴇʟ
-/bulkgen - ɢᴇɴᴇʀᴀᴛᴇ ʟɪɴᴋs ɪɴ ʙᴜʟᴋ
 /requeston <ɪᴅ> - ᴇɴᴀʙʟᴇ ᴊᴏɪɴ ʀᴇǫᴜᴇsᴛ
 /requestoff <ɪᴅ> - ᴅɪsᴀʙʟᴇ ᴊᴏɪɴ ʀᴇǫᴜᴇsᴛ
 /fsub_add <ɪᴅ> - ᴀᴅᴅ ғsᴜʙ ᴄʜᴀɴɴᴇʟ
 /fsub_remove <ɪᴅ> - ʀᴇᴍᴏᴠᴇ ғsᴜʙ ᴄʜᴀɴɴᴇʟ
-/addadmin <ɪᴅ> - ᴀᴅᴅ ɴᴇᴡ ᴀᴅᴍɪɴ
-/rmadmin <ɪᴅ> - ʀᴇᴍᴏᴠᴇ ᴀᴅᴍɪɴ
-/admins - ʟɪsᴛ ᴀʟʟ ᴀᴅᴍɪɴs
-/broadcast - sᴇɴᴅ ᴍᴇssᴀɢᴇ ᴛᴏ ᴀʟʟ
 /stats - sʜᴏᴡ ʙᴏᴛ sᴛᴀᴛs
 /status - ʙᴏᴛ sʏsᴛᴇᴍ sᴛᴀᴛᴜs
 /ping - ʙᴏᴛ ʟᴀᴛᴇɴᴄʏ
